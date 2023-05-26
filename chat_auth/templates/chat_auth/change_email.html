@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Change email</title>
+	{% load static %}
+	{% load bootstrap5 %}
+	{% bootstrap_css %}
+	{% bootstrap_javascript %} 
+</head>
+<body>
+<section class="vh-100" style="background-color: #2779e2;">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-9">
+
+        <h1 class="text-white mb-4">Change e-mail</h1>
+
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body">
+          	<form action="" method="POST">
+          	{% csrf_token %}
+            <div class="row align-items-center pt-4 pb-3">
+              <div class="col-md-3 ps-5">
+
+                <h6 class="mb-0">New email</h6>
+
+              </div>
+              <div class="col-md-9 pe-5">
+                {{form.email}}
+              </div>
+            </div>
+            <div class="row align-items-center pt-4 pb-3">
+              <div class="col-md-3 ps-5">
+
+                <h6 class="mb-0">Verification field</h6>
+
+              </div>
+              <div class="col-md-9 pe-5">
+                {{form.verification_field}}
+              </div>
+            </div>
+            <hr class="mx-n3">
+            <div class="px-5 py-4">
+              <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+            </div>
+            </form>
+            <p class="font-weight-bold"><a  onclick="send_secret_key()">Verification click</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="text/javascript">
+       function send_secret_key() {
+        var request = new XMLHttpRequest();
+        request.open('GET', '/chat_auth/send_secret_key/', true);
+        request.onreadystatechange = function () {
+            if (request.readyState === 4) {
+                if (request.status === 200) {
+                    alert("Message have been sent")
+                } else {
+                    alert("Error: " + request.statusText);
+                }
+            }
+        };
+        request.send();
+    }
+</script>
+{% if messages %}
+{{form.error}}
+{% for message in messages %}
+{{message}}
+{% endfor %}
+{% endif %} 
+</body>
+</html>

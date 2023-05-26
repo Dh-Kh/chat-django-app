@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Dashboard</title>
+	{% load static %}
+	{% load bootstrap5 %}
+	{% bootstrap_css %}
+	{% bootstrap_javascript %} 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+<body>
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+  	  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        Settings
+      </a>
+  	  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><a class="dropdown-item" href="{% url 'chat_auth:change_email' %}">
+          Change email
+        </a></li>
+        <li><a class="dropdown-item" href="{% url 'chat_auth:change_password' %}">
+          Change password
+        </a></li>
+        <li><a class="dropdown-item" href="{% url 'chat_auth:change_username' %}">
+          Change username
+        </a></li>
+      </ul>
+    <a class="navbar-brand" href="{% url 'chat_data:get_list_of_chat_rooms' %}">
+      <img
+        src="https://w7.pngwing.com/pngs/237/433/png-transparent-computer-icons-online-chat-chat-icon-miscellaneous-text-conversation.png"
+        class="me-2"
+        height="20"
+        alt="MDB Logo"
+        loading="lazy"
+        />
+      <small>Chat rooms</small>
+    </a>
+    <a class="navbar-brand" href="{% url 'chat_data:create_chat_room' %}">
+      <img
+        src="https://static.thenounproject.com/png/2206184-200.png"
+        class="me-2"
+        height="20"
+        alt="MDB Logo"
+        loading="lazy"
+        />
+      <small>Create chat room</small>
+    </a>
+    <a class="navbar-brand" href="{% url 'chat_auth:log_out' %}">
+      <img
+        src="https://w7.pngwing.com/pngs/475/85/png-transparent-computer-icons-logout-angle-text-black-thumbnail.png"
+        class="me-2"
+        height="20"
+        alt="MDB Logo"
+        loading="lazy"
+        />
+      <small>Log out</small>
+      </a>
+  </div>
+</nav>
+<h3>Choose room</h3>
+<form action="" method="POST">
+	{% csrf_token %}
+  <div class="input-group" style="width: 600px;">
+      <span class="input-group-text"><i class="fab fa-google"></i></span>
+      {{form.searching_of_chat}}
+      <button class="btn btn-outline-secondary" type="submit">
+        <i class="fa fa-home" aria-hidden="true"></i>
+      </button>
+  </div>
+</form>
+
+{% if messages %} 
+  {% for msg in messages %}
+    {{msg}}
+  {% endfor %}
+  
+{% endif %} 
+</body>
+</html>
