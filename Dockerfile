@@ -4,7 +4,7 @@ WORKDIR /app/chat_folder
 
 COPY requirements.txt .
 
-RUN pip install -r requirements.txt
+RUN grep -v twisted-iocpsupport requirements.txt | xargs -n 1 pip install --no-cache-dir
 
 COPY . .
 
