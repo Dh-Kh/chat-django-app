@@ -1,2 +1,5 @@
 chat_main/chat_env.env
 chat_auth/sensitive_ignore.py
+.venv
+.git
+.gitignore
